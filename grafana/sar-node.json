@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
-  "iteration": 1544086725253,
+  "id": 9,
+  "iteration": 1544089608716,
   "links": [],
   "panels": [
     {
@@ -24,6 +24,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "prometheus",
       "decimals": null,
       "fill": 1,
       "gridPos": {
@@ -56,7 +57,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "(sum(irate(node_cpu_seconds_total{mode=\"user\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"user\",instance=~'$node'}[5m])))*100/(count(node_cpu_seconds_total{mode=\"user\",instance=~'$node'}))",
+          "expr": "(sum(irate(node_cpu_seconds_total{mode=\"user\",instance=~'$node'}[5m])) or sum(irate(node_cpu{mode=\"user\",instance=~'$node'}[5m])))*100/(count(node_cpu{mode=\"user\",instance=~'$node'}))",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -108,6 +109,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "prometheus",
       "decimals": null,
       "fill": 1,
       "gridPos": {
@@ -140,19 +142,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "bash{exported_job=\"sar\",instance=\"vxl-1:9300\",job=\"prometheus\",verb=\"user\"}",
+          "expr": "bash{exported_job=\"sar\",instance=~\"$node:9300\", job=\"prometheus\",verb=\"user\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "user",
           "refId": "A"
-        },
-        {
-          "expr": "bash{exported_job=\"sar\",instance=\"vxl-1:9300\",job=\"prometheus\",verb=\"system\"}",
-          "format": "time_series",
-          "hide": true,
-          "intervalFactor": 1,
-          "legendFormat": "system",
-          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -206,11 +199,11 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
-          "text": "vxl-1:9100",
-          "value": "vxl-1:9100"
+          "selected": false,
+          "text": "rk2-compute",
+          "value": "rk2-compute"
         },
-        "datasource": "Prometheus",
+        "datasource": "prometheus",
         "definition": "up{job=\"node\"}",
         "hide": 0,
         "includeAll": false,
@@ -220,16 +213,26 @@
         "options": [
           {
             "selected": false,
-            "text": "localhost:9100",
-            "value": "localhost:9100"
+            "text": "rk-tst-prm1",
+            "value": "rk-tst-prm1"
+          },
+          {
+            "selected": false,
+            "text": "rk-tst-prm2",
+            "value": "rk-tst-prm2"
+          },
+          {
+            "selected": false,
+            "text": "rk2",
+            "value": "rk2"
           },
           {
             "selected": true,
-            "text": "vxl-1:9100",
-            "value": "vxl-1:9100"
+            "text": "rk2-compute",
+            "value": "rk2-compute"
           }
         ],
-        "query": "up{job=\"node\"}",
+        "query": "up{job=\"consul_node_exporter\"}",
         "refresh": 0,
         "regex": ".*instance=\"([^\"]+).*",
         "skipUrlSync": false,
@@ -243,7 +246,7 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
