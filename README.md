@@ -8,18 +8,16 @@ Simple & minimalistic Prometheus exporter for bash scripts.
 
 ## Installation
 Use [Docker image](https://hub.docker.com/r/greegorey/bash-exporter/) or binary file from [releases](https://github.com/gree-gorey/bash-exporter/releases).
-Also, youn need to:
+
+Also, you need to:
 1. supress default sysstat cron jobs
-2. copy regular_sa1 to /usr/lib/sysstat/
+2. copy regular\_sa1 to /usr/lib/sysstat/
 3. add cron job from cron.d/sysstat, restart cron
+4. cp -r etc/\* /etc/
+5. customize arguments in /etc/systemd/system/prometheus-vash\_exporter
+6. systemctl daemon-reload && systemctl restart prometheus-bash\_exporter
 
 ## Usage
-example
-```
-./bash-exporter -debug -path examples -interval 4
-```
-
-
 ```console
 Usage of ./bash-exporter:
   -debug
@@ -50,4 +48,4 @@ bash{job="job-2",verb="time"} 0.5
 ## TODO
 - [x] Docker image
 - [x] Several scripts
-- [ ] Systemd Unit
+- [x] Systemd Unit

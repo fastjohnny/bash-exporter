@@ -1,0 +1,13 @@
+[Unit]
+Description=Prometheus bash_exporter
+After=network.target
+
+[Service]
+Type=simple
+
+ExecStart=/usr/bin/bash-exporter -debug -path /etc/bash-exporter_sripts -interval 4
+SyslogIdentifier=prometheus_bash_exporter
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
