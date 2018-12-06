@@ -1,5 +1,2 @@
 #!/bin/sh
-
-echo "{\"items\": 21}"
-
-exit 0
+echo "{\"items\": 20}"

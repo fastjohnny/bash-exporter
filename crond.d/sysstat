@@ -1,0 +1,1 @@
+*/1 * * * * root command -v regular_sa1 > /dev/null && regular_sa1
